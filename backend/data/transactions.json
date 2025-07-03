@@ -1,0 +1,17 @@
+{
+    "transactions": [
+      {
+        "transaction_id": 1,
+        "account_id": 1,
+        "amount": 500.00,
+        "transaction_type": "deposit",
+        "description": "Initial deposit",
+        "transaction_date": "2024-01-01T10:00:00Z",
+        "running_balance": 1500.00,
+        "status": "completed",
+        "reference_number": "TXN001234567890",
+        "created_at": "2024-01-01T10:00:00Z"
+      }
+    ],
+    "nextId": 2
+  }
