@@ -138,7 +138,7 @@ class JSONDatabase {
   async getTransactionsByAccountId(accountId) {
     const data = await this.readFile("transactions.json");
     return data.transactions.filter(
-      (transaction) => transaction.account_id === parseInt(id)
+      (transaction) => transaction.account_id === parseInt(accountId)
     );
   }
 

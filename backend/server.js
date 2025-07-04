@@ -3,8 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import db from "./data/database.js";
 import userRoutes from "./routes/users.js";
-//import accountRoutes from "./routes/accounts.js";
-//import transactionRoutes from "./routes/transactions.js";
+import accountRoutes from "./routes/accounts.js";
+import transactionRoutes from "./routes/transactions.js";
 //import transferRoutes from "./routes/transfers.js";
 
 dotenv.config();
@@ -43,8 +43,8 @@ app.get("/api/test", async (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
-//app.use("/api/accounts", accountRoutes);
-//app.use("/api/transactions", transactionRoutes);
+app.use("/api/accounts", accountRoutes);
+app.use("/api/transactions", transactionRoutes);
 //app.use("/api/transfers", transferRoutes);
 
 app.use((error, req, res, next) => {
