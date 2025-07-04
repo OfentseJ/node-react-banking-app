@@ -110,7 +110,7 @@ class JSONDatabase {
     };
     data.accounts.push(newAccount);
     data.nextId++;
-    await this.writeFile("account.json", data);
+    await this.writeFile("accounts.json", data);
     return newAccount;
   }
 
@@ -196,7 +196,7 @@ class JSONDatabase {
     return newTransfer;
   }
 
-  async updateTransfer(id, update) {
+  async updateTransfer(id, updateData) {
     const data = await this.readFile("transfers.json");
     const transferIndex = data.transfers.findIndex(
       (transfer) => transfer.transfer_id === parseInt(id)

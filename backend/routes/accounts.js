@@ -32,7 +32,7 @@ router.post("/", authenticateToken, async (req, res) =>{
             return res.status(400).json({error: "Invalid account type"});
         }
 
-        const accountNumber = "ACC" + Date.now().toString();
+        const accountNumber = db.generateAccountNumber();
 
         const newAccount = {
             user_id: req.user.userId,
