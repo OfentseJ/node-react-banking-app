@@ -28,9 +28,15 @@ router.post("/", authenticateToken, async (req, res) => {
 });
 
 //Get transfer history
-router.get("/", authenticateToken, async (req, res) => {
+router.get("/:id", authenticateToken, async (req, res) => {
   try {
-    const userTransfers = await db.getTransfersByAccountId(req.user.userId);
+    const accounts = await db.getAccountsByUserId(req.user.userId);
+    const transfers = [];
+
+    for (const acc of accounts) {
+      const tx = await db.getTransfersByAccountId(acc.account_id);
+      transfers.push(...tx);
+    }
 
     if (!userTransfers) {
       return res.status(404).json({ error: "Transfer not found" });
