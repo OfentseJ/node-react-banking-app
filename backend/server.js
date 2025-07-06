@@ -21,10 +21,10 @@ app.get("/", (req, res) => {
     message: "Bank App API is running",
     version: "1.0.0",
     endpoints: {
-      users: "/api/users",
-      accounts: "/api/accounts",
-      transactions: "/api/transactions",
-      transfers: "/api/transfers",
+      users: "/users",
+      accounts: "/accounts",
+      transactions: "/transactions",
+      transfers: "/transfers",
     },
   });
 });
@@ -42,12 +42,12 @@ app.get("/api/test", async (req, res) => {
   }
 });
 
-app.use("/api/users", userRoutes);
-app.use("/api/accounts", accountRoutes);
-app.use("/api/transactions", transactionRoutes);
-app.use("/api/transfers", transferRoutes);
+app.use("/users", userRoutes);
+app.use("/accounts", accountRoutes);
+app.use("/transactions", transactionRoutes);
+app.use("/transfers", transferRoutes);
 
-app.use((error, req, res, next) => {
+app.use((error, req, res) => {
   console.error("Global error:", error);
   res.status(500).json({
     error: "something went wrong!",
