@@ -217,6 +217,14 @@ class JSONDatabase {
   }
 
   //Banking operations
+  /**
+   * Name: performWithdrawal
+   * Description:
+   * Handles the withdrawal of funds from an account.
+   * Expects account_id, amount, and an optional description.
+   * Validates the account, checks if the amount is positive,
+   * and ensures sufficient funds are available.
+   */
   async performDeposit(accountId, amount, description) {
     try {
       const account = await this.getAccountById(accountId);
@@ -242,6 +250,15 @@ class JSONDatabase {
     }
   }
 
+  /**
+   *Name: performTransfer
+   * 
+   * Description:
+   * Handles the transfer of funds between two accounts.
+   * Expects from_account_id, to_account_id, amount, and an optional description.
+   * Validates the accounts, checks if the amount is positive,
+   * and ensures sufficient funds are available.
+   */
   async performTransfer(fromAccountId, toAccountId, amount, description) {
     try {
       const fromAccount = await this.getAccountById(fromAccountId);
