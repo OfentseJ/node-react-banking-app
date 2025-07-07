@@ -263,7 +263,7 @@ class JSONDatabase {
 
       const transfer = await this.createTransfer({
         from_account_id: fromAccountId,
-        to_account_id: toAccount.account_id,
+        to_account_id: toAccountId,
         amount: parseFloat(amount),
         transfer_date: new Date().toISOString(),
         status: "completed",

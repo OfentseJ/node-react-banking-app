@@ -9,17 +9,16 @@ router.post("/", authenticateToken, async (req, res) => {
   try {
     const { from_account_id, to_account_id, amount, description } = req.body;
 
-    await db.performTransfer(
+    const { transfer } = await db.performTransfer(
       from_account_id,
       to_account_id,
       amount,
       description
     );
+
     res.status(201).json({
       message: "Transfer completed successfully",
-      transfer: newTransfer,
-      from_account_balance: newFromBalance,
-      to_account_balance: newToBalance,
+      transfer: transfer
     });
   } catch (error) {
     console.error("Create transfer error:", error);
