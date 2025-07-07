@@ -7,7 +7,15 @@ import {
 
 const router = express.Router();
 
-//Get all accounts for a user
+/**
+ * Name: Get User Accounts
+ * 
+ * Description:
+ * Retrieves all accounts associated with the authenticated user.
+ * Uses the user ID from the JWT token to fetch accounts from the database.
+ * Returns a list of accounts with their details.
+ * Expects a valid JWT token in the request header.
+ */
 router.get("/", authenticateToken, async (req, res) => {
   try {
     const userAccounts = await db.getAccountsByUserId(req.user.userId);
@@ -22,7 +30,16 @@ router.get("/", authenticateToken, async (req, res) => {
   }
 });
 
-//Create new account
+/**
+ * Name: Create New Account
+ * 
+ * Description:
+ * Creates a new account for the authenticated user.
+ * Expects account_type and initial_balance in the request body.
+ * Validates the account type and initializes the account with the provided balance.
+ * Returns the newly created account details on success.
+ * Expects a valid JWT token in the request header.
+ */
 router.post("/", authenticateToken, async (req, res) => {
   try {
     const { account_type, initial_balance = 0 } = req.body;
@@ -59,7 +76,15 @@ router.post("/", authenticateToken, async (req, res) => {
   }
 });
 
-//Get specific account
+/**
+ * Name: Get Account Details
+ * 
+ * Description:
+ * Retrieves details of a specific account by its ID.
+ * Uses the account ID from the request parameters.
+ * Checks if the authenticated user owns the account.
+ * Returns the account details on success.
+ */
 router.get(
   "/:id",
   authenticateToken,
@@ -77,7 +102,17 @@ router.get(
   }
 );
 
-//Get account transactions
+/**
+ * Name: Update Account
+ * 
+ * Description:
+ * Updates the details of a specific account.
+ * Expects account_type and balance in the request body.
+ * Validates the account type and updates the account details.
+ * Returns the updated account details on success.
+ * Checks if the authenticated user owns the account.
+ * Expects a valid JWT token in the request header.
+ */
 router.get(
   "/:id/transactions",
   authenticateToken,

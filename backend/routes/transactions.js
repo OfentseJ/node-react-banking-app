@@ -4,7 +4,20 @@ import { authenticateToken, checkAccountOwnership } from "../middleware/auth.js"
 
 const router = express.Router();
 
-//Create new transaction
+/**
+ * Name: Create New Transaction
+ * 
+ * Description:
+ * Creates a new transaction for the authenticated user's account.
+ * Expects amount, transaction_type (debit/credit), and an optional description in the
+ * request body.
+ * Validates the transaction type, checks if the amount is positive,
+ * and ensures sufficient funds are available.
+ * Generates a reference number, updates the account balance,
+ * and saves the transaction to the database.
+ * Returns the created transaction and new balance on success.
+ * Expects a valid JWT token in the request header.
+ */
 router.post("/", authenticateToken, async (req, res) => {
     try{
         const {amount, transaction_type, description} = req.body;
@@ -66,7 +79,16 @@ router.post("/", authenticateToken, async (req, res) => {
     }
 });
 
-//Get Transaction by ID
+/**
+ * Name: Get Transaction by ID
+ * 
+ * Description:
+ * Retrieves a specific transaction by its ID.
+ * Uses the transaction ID from the request parameters.
+ * Checks if the transaction exists in the database.
+ * Returns the transaction details on success.
+ * Expects a valid JWT token in the request header.
+ */
 router.get("/:id", async (req, res) => {
     try {
         const transaction = await db.getTransactionById(req.params.id);
@@ -86,7 +108,16 @@ router.get("/:id", async (req, res) => {
 });
 
 
-//Get all Transactions for user
+/**
+ * Name: Get User Transactions
+ * 
+ * Description:
+ * Retrieves all transactions associated with the authenticated user's accounts.  
+ * Uses the user ID from the JWT token to fetch accounts,
+ * then retrieves transactions for each account.
+ * Returns a list of transactions across all accounts.
+ * Expects a valid JWT token in the request header.
+ */
 router.get("/", authenticateToken, async (req, res) => {
     try{
         const userAccounts = await db.getAccountsByUserId(req.user.userId);

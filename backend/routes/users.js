@@ -6,7 +6,15 @@ import { authenticateToken, loginRateLimit } from "../middleware/auth.js";
 
 const router = express.Router();
 
-//Register new User
+ /**
+  * Name: Register User
+  * 
+  * Description: 
+  * Handles user registration.
+  * Expects email, password, first_name, last_name, phone_number, and date_of_birth in the request body. 
+  * Checks for required fields, verifies if the user already exists, hashes the password, creates a new user, 
+  * and returns the user data (excluding the password) on success.
+  */
 router.post("/register", async (req, res) => {
   try {
     const {
@@ -55,7 +63,16 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//Login user
+
+/**
+ * Name: User Login
+ * 
+ * Description: 
+ * Authenticates a user. 
+ * Expects email and password in the request body. 
+ * Checks credentials, verifies password, updates last login, 
+ * and returns a JWT token and user data (excluding the password) on success.
+ */
 router.post("/login", loginRateLimit, async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -98,7 +115,13 @@ router.post("/login", loginRateLimit, async (req, res) => {
   }
 });
 
-//Get user profile
+/**
+ * Name: Get User Profile
+ * 
+ * Description: 
+ * Retrieves the profile of the authenticated user. 
+ * Uses the user ID from the JWT token to fetch user data and returns it (excluding the password).
+ */
 router.get("/profile", authenticateToken, async (req, res) => {
   try {
     const user = await db.getUserById(req.user.userId);
@@ -116,6 +139,13 @@ router.get("/profile", authenticateToken, async (req, res) => {
   }
 });
 
+/**
+ * Name: Update User Profile
+ * Description: 
+ * Updates the profile of the authenticated user.
+ * Expects first_name, last_name, and phone_number in the request body (all optional).
+ * Updates the user record and returns the updated user data (excluding the password).
+ */
 router.put("/profile", authenticateToken, async (req, res) => {
   try {
     const { first_name, last_name, phone_number } = req.body;
