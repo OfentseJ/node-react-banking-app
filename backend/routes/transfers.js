@@ -9,25 +9,50 @@ const router = express.Router();
  * 
  * Description:
  * Handles the transfer of funds between two accounts.
- * Expects from_account_id, to_account_id, amount, and an optional description in the request body.
- * Validates the accounts, checks if the amount is positive, and ensures sufficient funds are available.
- * Performs the transfer, updates both accounts, and returns the transfer details on success.
+ * Expects from_account_id, to_account_id, beneficiary_id, amount, and an optional description in the request body.
+ * Validates the input fields, checks if the amount is positive,
+ * and ensures sufficient funds are available.
+ * If beneficiary_id is provided, it retrieves the beneficiary's account number.
+ * Performs the transfer and returns the transfer details on success.
  * Expects a valid JWT token in the request header.
  */
 router.post("/", authenticateToken, async (req, res) => {
   try {
-    const { from_account_id, to_account_id, amount, description } = req.body;
+    const { from_account_id, to_account_id, beneficiary_id, amount, description } = req.body;
 
-    const { transfer } = await db.performTransfer(
-      from_account_id,
-      to_account_id,
-      amount,
-      description
-    );
+    if (!from_account_id || !amount) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if(amount <= 0) {
+      return res.status(400).json({ error: "Amount must be positive" });
+    }
+
+    let destinationAccountId = to_account_id;
+
+    if(beneficiary_id) {
+      const beneficiary = await db.getBeneficiaryById(beneficiary_id);
+      
+      if(!beneficiary){
+        return res.status(404).json({error: "Beneficiary not found"});
+      }
+
+      destinationAccountId = beneficiary.account_number;
+    }
+
+    if (!destinationAccountId) {
+      return res.status(400).json({ error: "Either to_account_id or beneficiary_id is required" });
+    }
+
+    const result = await db.performTransfer(from_account_id, destinationAccountId, amount, description);
+
+    if (!result.success) {
+      return res.status(400).json({ error: result.error });
+    }
 
     res.status(201).json({
       message: "Transfer completed successfully",
-      transfer: transfer
+      transfer: result.transfer
     });
   } catch (error) {
     console.error("Create transfer error:", error);

@@ -207,6 +207,32 @@ class JSONDatabase {
     return data.transfers[transferIndex];
   }
 
+  //Beneficiary operations
+  async getBeneficiariesByUserId(userid) {
+    const data = await this.readFile("beneficiaries.json");
+    return data.beneficiaries.filter(
+      (beneficiary) => beneficiary.user_id === parseInt(userid)
+    );
+  }
+
+  async createBeneficiary(userId, beneficiaryData) {
+    const data = await this.readFile("beneficiaries.json");
+    const newBeneficiary = {
+      beneficiary_id: data.beneficiaries.length + 1,
+      user_id: userId,
+      ...beneficiaryData,
+      created_at: new Date().toISOString(),
+    };
+    data.beneficiaries.push(newBeneficiary);
+    await this.writeFile("beneficiaries.json", data);
+    return newBeneficiary;
+  }
+
+  async getBeneficiaryById(beneficiary_id){
+    const data = await this.readFile("beneficiaries.json");
+    return data.find(beneficiary => beneficiary.beneficiary_id === parseInt(beneficiary_id));
+  }
+
   //Utility funcitons
   generateAccountNumber() {
     return "ACC" + Date.now() + Math.floor(Math.random() * 1000);

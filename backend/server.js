@@ -6,6 +6,7 @@ import userRoutes from "./routes/users.js";
 import accountRoutes from "./routes/accounts.js";
 import transactionRoutes from "./routes/transactions.js";
 import transferRoutes from "./routes/transfers.js";
+import beneficiaryRoutes from "./routes/beneficiaries.js";
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use("/users", userRoutes);
 app.use("/accounts", accountRoutes);
 app.use("/transactions", transactionRoutes);
 app.use("/transfers", transferRoutes);
+app.use("/beneficiaries", beneficiaryRoutes);
 
 app.use((error, req, res) => {
   console.error("Global error:", error);
