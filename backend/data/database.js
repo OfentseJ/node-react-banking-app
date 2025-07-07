@@ -49,12 +49,13 @@ class JSONDatabase {
   async createUser(userData) {
     const data = await this.readFile("users.json");
     const newUser = {
-      user_id: new Date().toISOString(),
+      user_id: data.nextId,
       ...userData,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
     data.users.push(newUser);
+    data.nextId++;
     await this.writeFile("users.json", data);
     return newUser;
   }
@@ -102,12 +103,13 @@ class JSONDatabase {
   async createAccount(accountData) {
     const data = await this.readFile("accounts.json");
     const newAccount = {
-      account_id: new Date().toISOString,
+      account_id: data.nextId,
       ...accountData,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
     data.accounts.push(newAccount);
+    data.nextId++
     await this.writeFile("accounts.json", data);
     return newAccount;
   }
@@ -150,11 +152,12 @@ class JSONDatabase {
   async createTransaction(transactionData) {
     const data = await this.readFile("transactions.json");
     const newTransaction = {
-      transaction_id: new Date().toISOString(),
+      transaction_id: data.nextId,
       ...transactionData,
       created_at: new Date().toISOString(),
     };
     data.transactions.push(newTransaction);
+    data.nextId++;
     await this.writeFile("transactions.json", data);
     return newTransaction;
   }
@@ -183,11 +186,12 @@ class JSONDatabase {
   async createTransfer(transferData) {
     const data = await this.readFile("transfers.json");
     const newTransfer = {
-      transfer_id: new Date().toISOString(),
+      transfer_id: data.nextId,
       ...transferData,
       created_at: new Date().toISOString(),
     };
     data.transfers.push(newTransfer);
+    data.nextId++;
     await this.writeFile("transfers.json", data);
     return newTransfer;
   }

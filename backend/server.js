@@ -49,7 +49,7 @@ app.use("/transactions", transactionRoutes);
 app.use("/transfers", transferRoutes);
 app.use("/beneficiaries", beneficiaryRoutes);
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
   console.error("Global error:", error);
   res.status(500).json({
     error: "something went wrong!",
