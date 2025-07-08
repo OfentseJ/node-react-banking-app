@@ -18,7 +18,8 @@ const router = express.Router();
  */
 router.post("/", authenticateToken, async (req, res) => {
   try {
-    const { from_account_id, to_account_id, beneficiary_id, amount, description } = req.body;
+    const from_account_id = req.user.userId;
+    const { to_account_id, beneficiary_id, amount, description } = req.body;
 
     if (!from_account_id || !amount) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -28,7 +29,16 @@ router.post("/", authenticateToken, async (req, res) => {
       return res.status(400).json({ error: "Amount must be positive" });
     }
 
-    let destinationAccountId = to_account_id;
+    let destinationAccountNummber;
+    if(to_account_id){
+      const toAccount = await db.getAccountById(to_account_id);
+      
+      if(!toAccount){
+        return res.status(404).json({error: "Account not found"});
+      }
+      
+      destinationAccountNummber = toAccount.account_number;
+    }
 
     if(beneficiary_id) {
       const beneficiary = await db.getBeneficiaryById(beneficiary_id);
@@ -37,14 +47,14 @@ router.post("/", authenticateToken, async (req, res) => {
         return res.status(404).json({error: "Beneficiary not found"});
       }
 
-      destinationAccountId = beneficiary.account_number;
+      destinationAccountNummber = beneficiary.account_number;
     }
 
-    if (!destinationAccountId) {
+    if (!destinationAccountNummber) {
       return res.status(400).json({ error: "Either to_account_id or beneficiary_id is required" });
     }
 
-    const result = await db.performTransfer(from_account_id, destinationAccountId, amount, description);
+    const result = await db.performTransfer(from_account_id, destinationAccountNummber, amount, description);
 
     if (!result.success) {
       return res.status(400).json({ error: result.error });

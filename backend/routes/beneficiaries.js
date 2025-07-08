@@ -44,7 +44,7 @@ router.post("/", authenticateToken, async (req, res) => {
             return res.status(400).json({ error: "All fields are required" });
         }
 
-        const newBeneficiary = await db.addBeneficiary(req.user.userId,{
+        const newBeneficiary = await db.createBeneficiary(req.user.userId,{
             nickname,
             account_number
         });

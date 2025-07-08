@@ -134,7 +134,7 @@ router.get("/", authenticateToken, async (req, res) => {
 
         res.json({
             message: "User Transactions retrieved successfully",
-            accounts: accounts.map(a => a.account_id),
+            accounts: userAccounts.map(a => a.account_id),
             transactions: allTransactions
         })
     }catch(error){

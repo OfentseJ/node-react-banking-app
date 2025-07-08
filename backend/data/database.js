@@ -234,7 +234,7 @@ class JSONDatabase {
 
   async getBeneficiaryById(beneficiary_id){
     const data = await this.readFile("beneficiaries.json");
-    return data.find(beneficiary => beneficiary.beneficiary_id === parseInt(beneficiary_id));
+    return data.beneficiaries.find(beneficiary => beneficiary.beneficiary_id === parseInt(beneficiary_id));
   }
 
   //Utility funcitons
@@ -289,7 +289,7 @@ class JSONDatabase {
    * Validates the accounts, checks if the amount is positive,
    * and ensures sufficient funds are available.
    */
-  async performTransfer(fromAccountId, toAccountId, amount, description) {
+  async performTransfer(fromAccountId, toAccountNumber, amount, description) {
     try {
       const fromAccount = await this.getAccountById(fromAccountId);
       const toAccount = await this.getAccountByNumber(toAccountNumber);
@@ -306,11 +306,11 @@ class JSONDatabase {
       const toNewBalance = parseFloat(toAccount.balance) + parseFloat(amount);
 
       await this.updateAccount(fromAccountId, { balance: fromNewBalance });
-      await this.updateAccount(toAccountId, { balance: toNewBalance });
+      await this.updateAccount(toAccount.account_id, { balance: toNewBalance });
 
       const transfer = await this.createTransfer({
         from_account_id: fromAccountId,
-        to_account_id: toAccountId,
+        to_account_id: toAccount.account_id,
         amount: parseFloat(amount),
         transfer_date: new Date().toISOString(),
         status: "completed",
@@ -322,7 +322,7 @@ class JSONDatabase {
         account_id: fromAccountId,
         amount: parseFloat(amount),
         transaction_type: "transfer",
-        description: `Transfer to ${toAccountNumber}: ${
+        description: `Transfer to ${toAccount.account_number}: ${
           description || "Transfer"
         }`,
         transaction_date: new Date().toISOString(),

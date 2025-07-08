@@ -1,17 +1,89 @@
 {
-    "transactions": [
-      {
-        "transaction_id": 1,
-        "account_id": 1,
-        "amount": 500.00,
-        "transaction_type": "deposit",
-        "description": "Initial deposit",
-        "transaction_date": "2024-01-01T10:00:00Z",
-        "running_balance": 1500.00,
-        "status": "completed",
-        "reference_number": "TXN001234567890",
-        "created_at": "2024-01-01T10:00:00Z"
-      }
-    ],
-    "nextId": 2
-  }
+  "transactions": [
+    {
+      "transaction_id": 1,
+      "account_id": 1,
+      "amount": 500,
+      "transaction_type": "deposit",
+      "description": "Initial deposit",
+      "transaction_date": "2024-01-01T10:00:00Z",
+      "running_balance": 1500,
+      "status": "completed",
+      "reference_number": "TXN001234567890",
+      "created_at": "2024-01-01T10:00:00Z"
+    },
+    {
+      "transaction_id": 2,
+      "account_id": "3",
+      "amount": 200,
+      "transaction_type": "transfer",
+      "description": "Transfer to ACC1751955863120415: savings",
+      "transaction_date": "2025-07-08T06:41:21.108Z",
+      "running_balance": 1000,
+      "status": "completed",
+      "reference_number": "TRF1751956881106367",
+      "created_at": "2025-07-08T06:41:21.108Z"
+    },
+    {
+      "transaction_id": 3,
+      "account_id": 2,
+      "amount": 200,
+      "transaction_type": "deposit",
+      "description": "Transfer from ACC1751955923686800: savings",
+      "transaction_date": "2025-07-08T06:41:21.109Z",
+      "running_balance": 400,
+      "status": "completed",
+      "reference_number": "TRF1751956881106367",
+      "created_at": "2025-07-08T06:41:21.109Z"
+    },
+    {
+      "transaction_id": 4,
+      "account_id": 3,
+      "amount": 150,
+      "transaction_type": "transfer",
+      "description": "Transfer to ACC1751955863120415: savings",
+      "transaction_date": "2025-07-08T06:55:57.065Z",
+      "running_balance": 850,
+      "status": "completed",
+      "reference_number": "TRF1751957757060451",
+      "created_at": "2025-07-08T06:55:57.066Z"
+    },
+    {
+      "transaction_id": 5,
+      "account_id": 2,
+      "amount": 150,
+      "transaction_type": "deposit",
+      "description": "Transfer from ACC1751955923686800: savings",
+      "transaction_date": "2025-07-08T06:55:57.067Z",
+      "running_balance": 550,
+      "status": "completed",
+      "reference_number": "TRF1751957757060451",
+      "created_at": "2025-07-08T06:55:57.068Z"
+    },
+    {
+      "transaction_id": 6,
+      "account_id": 3,
+      "amount": 150,
+      "transaction_type": "transfer",
+      "description": "Transfer to ACC001234567890: savings",
+      "transaction_date": "2025-07-08T07:07:12.523Z",
+      "running_balance": 700,
+      "status": "completed",
+      "reference_number": "TRF175195843252192",
+      "created_at": "2025-07-08T07:07:12.523Z"
+    },
+    {
+      "transaction_id": 7,
+      "account_id": 1,
+      "amount": 150,
+      "transaction_type": "deposit",
+      "description": "Transfer from ACC1751955923686800: savings",
+      "transaction_date": "2025-07-08T07:07:12.524Z",
+      "running_balance": 1650,
+      "status": "completed",
+      "reference_number": "TRF175195843252192",
+      "created_at": "2025-07-08T07:07:12.525Z"
+    }
+  ],
+  "nextId": 8
+}

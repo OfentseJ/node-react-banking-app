@@ -1,16 +1,36 @@
 {
-    "accounts": [
-      {
-        "account_id": 1,
-        "user_id": 1,
-        "account_name":"checking account",
-        "account_number": "ACC001234567890",
-        "account_type": "checking",
-        "balance": 1500.00,
-        "status": "active",
-        "created_at": "2024-01-01T10:00:00Z",
-        "updated_at": "2024-01-01T10:00:00Z"
-      }
-    ],
-    "nextId": 2
-  }
+  "accounts": [
+    {
+      "account_id": 1,
+      "user_id": 1,
+      "account_name": "checking account",
+      "account_number": "ACC001234567890",
+      "account_type": "checking",
+      "balance": 1650,
+      "status": "active",
+      "created_at": "2024-01-01T10:00:00Z",
+      "updated_at": "2025-07-08T07:07:12.520Z"
+    },
+    {
+      "account_id": 2,
+      "user_id": 3,
+      "account_number": "ACC1751955863120415",
+      "account_type": "savings",
+      "balance": 550,
+      "status": "active",
+      "created_at": "2025-07-08T06:24:23.123Z",
+      "updated_at": "2025-07-08T06:55:57.059Z"
+    },
+    {
+      "account_id": 3,
+      "user_id": 3,
+      "account_number": "ACC1751955923686800",
+      "account_type": "checking",
+      "balance": 700,
+      "status": "active",
+      "created_at": "2025-07-08T06:25:23.687Z",
+      "updated_at": "2025-07-08T07:07:12.516Z"
+    }
+  ],
+  "nextId": 4
+}

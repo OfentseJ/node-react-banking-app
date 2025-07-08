@@ -1,11 +1,18 @@
 {
-    "beneficiaries": [
+  "beneficiaries": [
     {
       "beneficiary_id": 1,
       "user_id": 5,
       "nickname": "Mom",
       "account_number": "ACC1002345",
       "created_at": "2025-07-03T20:00:00.000Z"
+    },
+    {
+      "beneficiary_id": 2,
+      "user_id": 3,
+      "nickname": "Joe",
+      "account_number": "ACC001234567890",
+      "created_at": "2025-07-08T06:51:19.049Z"
     }
   ],
   "nextId": 2

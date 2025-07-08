@@ -102,17 +102,6 @@ router.get(
   }
 );
 
-/**
- * Name: Update Account
- * 
- * Description:
- * Updates the details of a specific account.
- * Expects account_type and balance in the request body.
- * Validates the account type and updates the account details.
- * Returns the updated account details on success.
- * Checks if the authenticated user owns the account.
- * Expects a valid JWT token in the request header.
- */
 router.get(
   "/:id/transactions",
   authenticateToken,
