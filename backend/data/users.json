@@ -25,7 +25,20 @@
       "last_login": "2025-07-03T19:55:07.934Z",
       "created_at": "2025-07-03T19:45:51.666Z",
       "updated_at": "2025-07-03T19:59:32.984Z"
+    },
+    {
+      "user_id": 3,
+      "email": "makhutjaofentse@gmail.com",
+      "password": "$2b$10$arllhbvquQE90lpCVsRWsOSzlkGMEpYe5cj8nH8jMtXjhfRdWQBh6",
+      "first_name": "Ofentse",
+      "last_name": "Makhutja",
+      "phone_number": "0614467573",
+      "date_of_birth": "2025-07-28",
+      "is_active": true,
+      "last_login": "2025-07-30T19:06:16.605Z",
+      "created_at": "2025-07-30T19:05:52.884Z",
+      "updated_at": "2025-07-30T19:06:16.606Z"
     }
   ],
-  "nextInt": 3
+  "nextInt": 4
 }
